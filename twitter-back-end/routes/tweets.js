@@ -60,8 +60,9 @@ router.post(
   "/",
   validateTweet,
   asyncHandler(async (req, res) => {
-    const { message } = req.body;
-    const tweet = await Tweet.create({ message, userId: req.user.id });
+    const { message, userId } = req.body;
+    const parsedId = await parseInt(userId, 10);
+    const tweet = await Tweet.create({ message, userId: parsedId });
     res.json({ tweet });
   })
 );
