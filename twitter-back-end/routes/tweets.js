@@ -13,9 +13,9 @@ router.get(
   "/",
   asyncHandler(async (req, res) => {
     const tweets = await Tweet.findAll({
-      include: [{ model: User, as: "user", attributes: ["username"] }],
+      include: [{ model: User, as: "user", attributes: ["username", "id"] }],
       order: [["createdAt", "DESC"]],
-      attributes: ["message"],
+      attributes: ["message", "id"],
     });
     res.json({ tweets });
   })

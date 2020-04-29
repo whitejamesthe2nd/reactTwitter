@@ -65,12 +65,21 @@ router.get(
   "/:id/tweets",
   requireAuth,
   asyncHandler(async (req, res, next) => {
+    const userId = parseInt(req.params.id, 10);
     const tweets = await Tweet.findAll({
-      where: {
-        userId: req.params.id,
-      },
+      where: { userId },
     });
     res.json({ tweets });
+  })
+);
+
+router.get(
+  "/:id",
+  requireAuth,
+  asyncHandler(async (req, res, next) => {
+    const userId = parseInt(req.params.id, 10);
+    const user = await User.findByPk(userId);
+    res.json({ user });
   })
 );
 
