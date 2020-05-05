@@ -78,8 +78,8 @@ router.get(
   requireAuth,
   asyncHandler(async (req, res, next) => {
     const userId = parseInt(req.params.id, 10);
-    const user = await User.findByPk(userId);
-    res.json({ user });
+    const { id, username } = await User.findByPk(userId);
+    res.json({ user: { id, username } });
   })
 );
 
