@@ -31,6 +31,7 @@ router.post(
     const user = await User.create({ username, email, hashedPassword });
 
     const token = getUserToken(user);
+    res.cookie("token", token);
     res.status(201).json({
       user: { id: user.id },
       token,
@@ -57,6 +58,7 @@ router.post(
       return next(err);
     }
     const token = getUserToken(user);
+    res.cookie("token", token);
     res.json({ token, user: { id: user.id } });
   })
 );
