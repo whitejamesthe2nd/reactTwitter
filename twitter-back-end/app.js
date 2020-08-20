@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const { ValidationError } = require("sequelize");
 const indexRouter = require("./routes/index");
 const tweetsRouter = require("./routes/tweets");
@@ -12,6 +13,7 @@ const app = express();
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cookieParser());
 
 app.use("/", indexRouter);
 app.use("/tweets", tweetsRouter);
